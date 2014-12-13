@@ -35,7 +35,13 @@
          </div>
          
               <button type="submit" ng-click='submit(form)'class="btn btn-default ">Submit</button>
+
+              <div class="col-sm-8" ng-show="details.response !=null">
+           <label for="textareaEdit">Text area:</label>
+              <textarea ng-model="details.response ">{{details.response}}</textarea>
          </div>
+         </div>
+         
    
   </div>
 

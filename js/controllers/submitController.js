@@ -1,5 +1,6 @@
 app.controller('submitCtrl',function($scope,httpService){
 	 $scope.details = {};
+	 $scope.response={};
 	
 	$scope.submit=function(details)
 	{
@@ -10,9 +11,8 @@ app.controller('submitCtrl',function($scope,httpService){
 		res.then(function(data)
 		{
 			console.log('result '+data.login);
+			$scope.details.response=data;
 		})
-	
-
 	}
 
 })
