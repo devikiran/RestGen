@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="RestGen">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome!</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome!</title>
 
-    <!-- Bootstrap -->
-    <script src="lib/angular.js"></script>
-    
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+  <!-- Bootstrap -->
+  <script src="lib/angular.js"></script>
 
-  </head>
-  <body >
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<body >
   <div class="container" >
     <form class="form-horizontal" role="form" ng-controller='submitCtrl'>
 
-       
-        <div  class="btn-group btn-input clearfix col-sm-2">
-                        <!--   {{ activity.currentActivity}} -->
-           <div>
-        
-             <select ng-model="activity.currentActivity"
-                                    ng-options="act for act in activities" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown"> 
+
+      <div  class="btn-group btn-input clearfix col-sm-2">
+        <!--   {{ activity.currentActivity}} -->
+        <div>
+
+         <select ng-model="activity.currentActivity"
+         ng-options="act for act in activities" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown"> 
 
 
-                            </select>
-                            {{ activity.currentActivity}}
-          </div>
-</div>
-       <div class="form-group">
-           
-              <div class="col-sm-8">
-                <input type="text" class="form-control" ng-model="details.apiUrl" placeholder="apihere.com">
-              </div>
-         </div>
-         
-              <button type="submit" ng-click='submit(form)'class="btn btn-default ">Submit</button>
+       </select>
+       <!-- {{ activity.currentActivity}} -->
+     </div>
+   </div>
 
-              <div class="col-sm-8" ng-show="details.response !=null">
-           <label for="textareaEdit">Text area:</label>
-              <textarea ng-model="details.response ">{{details.response}}</textarea>
-         </div>
-         </div>
-         
-   
-  </div>
+
+   <div class="form-group">
+
+    <div class="col-sm-8">
+      <input type="text" class="form-control" ng-model="details.apiUrl" placeholder="apihere.com">
+    </div>
+
+    <div class="col-xs-6">
+      <label for="header">Header</label>
+      
+
+    </div>
+
+    <div class="col-sm-8 ">
+      <div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="city in newPlace.cities">
+
+            <span ng-hide="edit">{{city}}</span>
+            <span ng-show="edit">
+              <input type="text" ng-model="city"/>
+            </span>
+            <button ng-show="edit" class="btn btn-sucess" ng-click="edit = false">save</button>
+            <button ng-hide="edit" class="btn btn-warning" ng-click="edit = true">edit</button>
+          </li>
+          <li class="list-group-item">
+            
+            <input type="text" class="=form-control" ng-model="details.header.key" placeholder="Key">
+            <input type="text" class="=form-control" ng-model="details.header.value" placeholder="value">
+            <button ng-click="addCity(details.header.key,details.header.value)">Add</button>
+          </li>
+        </ul>
+      </div>
+
+
+
+      <button type="submit" ng-click='submit(form)'class="btn btn-default ">Submit</button>
+
+      <div class="col-sm-8" ng-show="details.response !=null">
+       <label for="textareaEdit">Text area:</label>
+       <textarea ng-model="details.response ">{{details.response}}</textarea>
+     </div>
+   </div>
+
+
+ </div>
 
 </form>
 {{details.apiUrl}}
@@ -54,13 +84,13 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services/httpService.js"></script>
-    <script src="js/controllers/submitController.js"></script>
-    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="lib/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services/httpService.js"></script>
+<script src="js/controllers/submitController.js"></script>
 
-  </body>
+
+</body>
 </html>

@@ -5,6 +5,37 @@ app.controller('submitCtrl',function($scope,httpService){
         
         currentActivity: "POST"
     };
+
+    $scope.addPlace = function(newPlace) {
+
+			if ($scope.countryForm.$invalid) {
+				alert('invalid, aborting aborting');
+			} else {
+				var place = angular.copy(newPlace);
+
+				place.flag = $scope.flags[$scope.index];
+
+				placesData.addPlace(place);
+			}
+		}
+
+		$scope.newPlace = {
+			cities: ['dummy']
+		}
+
+		$scope.addCity = function(key,value) {
+
+			console.log('key is '+key +'value is '+value);
+			var headerObj = new Object();
+			headerObj.key=key;
+			headerObj.value=value;
+			/*headerobjects.push(headerObj);*/
+
+			$scope.newPlace.cities.push(headerObj);
+
+			$scope.newCity = '';
+			$scope.index++;
+		};
  
     $scope.activities =
     [
