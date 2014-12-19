@@ -47,20 +47,34 @@
     <div class="col-sm-8 ">
       <div>
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="city in newPlace.cities">
-
-            <span ng-hide="edit">{{city}}</span>
-            <span ng-show="edit">
-              <input type="text" ng-model="city"/>
+          <li class="list-group-item" ng-repeat="(key,value) in newPlace.cities">
+             
+           <!--  <span ng-hide="editkey">
+            <input type="text" ng-init="key">
+            </input>
             </span>
-            <button ng-show="edit" class="btn btn-sucess" ng-click="edit = false">save</button>
-            <button ng-hide="edit" class="btn btn-warning" ng-click="edit = true">edit</button>
+              <span ng-hide="editvalue">
+               <input type="text" ng-init="value">
+            </input>
+           </span>-->
+           {{key}}
+           <div ng-show="key>=1">
+           <span >
+              <input type="text"  name="keynew" ng-model="value.key"/>
+              <input type="text"  name="valueNew" ng-model="value.value" />
+        </span>
+              <button class="btn btn-sucess" ng-click="removeCity(key)">del</button>
+            
+          </div>
+
+           <!--  <button ng-show="editkey" class="btn btn-sucess" ng-click="editkey = false">save</button>
+            <button ng-hide="editkey" class="btn btn-warning" ng-click="editkey = true">edit</button> -->
           </li>
           <li class="list-group-item">
             
-            <input type="text" class="=form-control" ng-model="details.header.key" placeholder="Key">
-            <input type="text" class="=form-control" ng-model="details.header.value" placeholder="value">
-            <button ng-click="addCity(details.header.key,details.header.value)">Add</button>
+            <input type="text" name="keymain" class="=form-control" ng-model="details.header.key" placeholder="Key">
+            <input type="text" name="valueMain" class="=form-control" ng-model="details.header.value" placeholder="value">
+            <button class="btn btn-sucess" ng-click="addCity(details.header.key,details.header.value)">Add</button>
           </li>
         </ul>
       </div>

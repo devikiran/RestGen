@@ -20,7 +20,7 @@ app.controller('submitCtrl',function($scope,httpService){
 		}
 
 		$scope.newPlace = {
-			cities: ['dummy']
+			cities: []
 		}
 
 		$scope.addCity = function(key,value) {
@@ -33,8 +33,17 @@ app.controller('submitCtrl',function($scope,httpService){
 
 			$scope.newPlace.cities.push(headerObj);
 
-			$scope.newCity = '';
+			$scope.details.header.key = '';
+			$scope.details.header.value='';
 			$scope.index++;
+		};
+
+		$scope.removeCity=function(key){
+			console.log('key is '+key);
+			//delete $scope.newPlace.cities[key];
+			$scope.newPlace.cities.splice(key, 1);
+			console.log($scope.newPlace.cities);
+			$scope.key--;
 		};
  
     $scope.activities =
