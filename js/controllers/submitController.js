@@ -1,48 +1,41 @@
 app.controller('submitCtrl',function($scope,httpService){
 	 $scope.details = {};
 	 $scope.response={};
-	$scope.activity = {
+	 $scope.activity = {
         
         currentActivity: "POST"
     };
 
-    $scope.addPlace = function(newPlace) {
-
-			if ($scope.countryForm.$invalid) {
-				alert('invalid, aborting aborting');
-			} else {
-				var place = angular.copy(newPlace);
-
-				place.flag = $scope.flags[$scope.index];
-
-				placesData.addPlace(place);
-			}
-		}
+   
 
 		$scope.newPlace = {
 			cities: []
 		}
+		$scope.inputHeaders=new Array();
 
 		$scope.addCity = function(key,value) {
 
-			console.log('key is '+key +'value is '+value);
+			
 			var headerObj = new Object();
+			//headerObj.set(key,value);
 			headerObj.key=key;
 			headerObj.value=value;
-			/*headerobjects.push(headerObj);*/
+			//headerobjects.push(headerObj);
 
-			$scope.newPlace.cities.push(headerObj);
-
+			//$scope.newPlace.cities.push(headerObj);
+			$scope.inputHeaders.push(headerObj);
+			console.log(key+'input values '+value)
 			$scope.details.header.key = '';
 			$scope.details.header.value='';
-			$scope.index++;
+			//$scope.index++;
 		};
 
 		$scope.removeCity=function(key){
 			console.log('key is '+key);
+			$scope.inputHeaders.splice(key,1);
 			//delete $scope.newPlace.cities[key];
-			$scope.newPlace.cities.splice(key, 1);
-			console.log($scope.newPlace.cities);
+			//$scope.newPlace.cities.splice(key, 1);
+			console.log('deleted '+$scope.newPlace.cities);
 			$scope.key--;
 		};
  
@@ -58,9 +51,29 @@ app.controller('submitCtrl',function($scope,httpService){
        
 	$scope.submit=function(details)
 	{
+	/*	var headers=$scope.inputHeaders;
+		for(var i=0;i<=headers.length;i++)
+			{
+				
+			//console.log('inital '+headers[i].value)
+			console.log('headers key '+headers[i].key +'value is '+headers[i].value);
+			
+			}*/
+			$scope.testHeaders={};
+
+			$scope.inputHeaders.forEach(function (username, userId) {
+ 						 console.log(userId, username); 
+ 						 console.log(username.key);console.log(username.value);
+ 						 $scope.testHeaders[username.key] = username.value;
+  
+					});
+
+
+
+			console.log('json '+JSON.stringify($scope.testHeaders))
 		   
 		alert('url is '+$scope.details.apiUrl);
-		var res=httpService.getResponse($scope.details.apiUrl,$scope.activity.currentActivity);
+		var res=httpService.getResponse($scope.details.apiUrl,$scope.activity.currentActivity,$scope.testHeaders);
 		
 		res.then(function(data)
 		{
